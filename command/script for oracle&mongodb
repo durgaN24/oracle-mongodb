@@ -1,0 +1,132 @@
+Commands/script for Oracle 
+
+
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+drop table Persons;
+
+/*#no auto increment in orable */
+
+CREATE TABLE Animals (
+  NAME  VARCHAR2(50)  NOT NULL);
+
+ALTER TABLE Animals ADD (
+  CONSTRAINT dept_pk PRIMARY KEY (ID));
+
+CREATE SEQUENCE danimal_seq START WITH 1;
+
+select * from Animals;
+
+INSERT INTO Animals (NAME) VALUES ('dog');
+
+/*Inserting multiple values in table*/
+
+INSERT INTO Animals (NAME) 
+  WITH names AS ( 
+    SELECT 'Fox'    FROM dual UNION ALL 
+    SELECT 'Squirrel'   FROM dual UNION ALL 
+    SELECT 'Frog' FROM dual UNION ALL 
+    SELECT 'Owl'     FROM dual 
+  ) 
+  SELECT * FROM names;
+  
+
+
+
+
+/*to drop table*/
+drop table Animals;
+
+/*Rollback previous DML operations*/
+ROLLBACK
+
+/*For loop to insert 1000+ values in tale*/
+SET SERVEROUTPUT ON;
+DECLARE
+
+BEGIN
+
+    FOR INDEX1 IN 1..250
+    LOOP
+                INSERT INTO Animals (NAME) 
+        WITH names AS ( 
+        SELECT 'Fox'    FROM dual UNION ALL 
+        SELECT 'Squirrel'   FROM dual UNION ALL 
+        SELECT 'Frog' FROM dual UNION ALL 
+        SELECT 'Owl'     FROM dual 
+        ) 
+        SELECT * FROM names;
+    
+    END LOOP;
+    
+END;
+
+For exporting data from table from SQL Developer 
+Go to -> connections -> tales -> Actions(on top left corner of table) -> select export -> select format to csv -> select file location  -> next -> next -> finish
+
+
+
+
+
+
+
+—-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Commands/script for mongodb
+
+Show database
+show dbs
+
+Use/create database
+use dataase_name
+
+Create collection
+db.createCollection(name, options)
+
+Insert data into collection
+db.collection_name.insertOne(
+   { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } }
+)
+
+Insert multiple documents
+db.collection_name.insertMany([
+   { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
+   { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
+   { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
+])
+
+Find collection
+db.collection_name.find( {} )
+
+Inserting 1000 queries at a time
+
+var arrData = new Array(10000).fill({ "date": new Date() })
+db.collection.insertMany(arrData);
+
+To retrieve the inserted documents
+db.<document_name>.find( {} )
+
+
+
+Export data from collections as csv file
+
+pwd
+/usr/local/Cellar/mongodb-database-tools/100.5.1/bin
+./mongoexport --db newdb --collection collection  --type=csv --fields=date --out=/Users/durga/Documents/reoprt.csv
+Output-
+2022-01-13T23:50:40.180-0600	connected to: mongodb://localhost/
+2022-01-13T23:50:40.242-0600	exported 10000 records
+
+
+Links
+https://docs.mongodb.com/manual/tutorial/insert-documents/
+
