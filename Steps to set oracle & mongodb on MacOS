@@ -1,0 +1,87 @@
+Steps to set up Oracle DB on MacOS
+
+Note: Oracle database is not supported on MacOs as Windows and other OSs. We can use Oracle VM(on virtual box) as a database.
+
+To install Oracle database we need
+1.	Virtual Box
+Download link
+https://www.virtualbox.org/wiki/Downloads (Click on OS X hosts)
+
+Error 
+If Installation error occurs 
+First thing to check is whether MacOS blocked the loading process.
+
+Go to- Apple logo on left side->System & preferences->Security & Privacy->General.
+If blocked-> unlock and click on ‘Allow’ button.
+(This button will be shown for only 30 mins after downloading. If not visible-reinstall to allow)
+
+2.	Download “Oracle Developer VM”
+Download link-
+https://www.oracle.com/database/technologies/databaseappdev-vm.html
+
+3.	Java
+As per the requirements given in the SQL Developer website, JDK 8 or 11 is required.
+But for MacOS it was not working.
+
+Install JAVA 17(macOS x64 DMG Installer)
+https://www.oracle.com/java/technologies/downloads/#jdk17-mac
+
+Change the JDK version  8/11 from sqldeveloper.sh file to JAVA 17
+Go to-
+Applications->SQL Developer->show package contents->MacOS->sqldeveloper.sh
+Useful link for Java error-
+https://apple.stackexchange.com/questions/174546/how-to-start-sql-developer-with-the-correct-java-version
+
+4.	SQL Developer
+Download Link-
+https://www.oracle.com/tools/downloads/sqldev-downloads.html
+
+             
+
+             To create connection:
+              Enter these details for your connection:
+●	Name: whatever you like. A name such as “VirtualBox Oracle” is OK if you can’t think of anything.
+●	Username: hr
+●	Password: oracle
+●	Check Save Password if you don’t want to enter the password every time.
+●	Hostname: localhost
+●	Port: 1521
+●	Select “Service Name” instead of “SID”
+●	Service Name: orcl
+●	Connection Type: Basic
+
+—----------------------------------------------------------------------------------------------------------------------------
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+Steps to set up MongoDB on MacOS
+ 
+Installation of MongoDB Community Edition on macOS
+Follow the steps given in the following link
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#std-label-install
+
+Steps
+1.	Install MongoDB 5.0 Community Edition on macOS using the third-party Homebrew package manager.
+https://brew.sh/
+
+2.	After installing brew package run following commands on terminal
+
+●	brew tap mongodb/brew
+●	brew install mongodb-community@5.0
+
+●	To start-> brew services start mongodb-community@5.0
+●	To stop-> brew services stop mongodb-community@5.0
+●	mogod
+
+      On new terminal
+●	mongo
+
+
+
+Errors
+
+mongosh not found
+Resolved by using mongo instead of mongosh. Apparently image uses mongo but the default connection command uses mongosh.
+
+Mongoexport command not found
+If mongoexport is in the same directory that your current one (and also is executable and you got perms to execute it) then you need to prepend executable with ./ and invoke it that way.
